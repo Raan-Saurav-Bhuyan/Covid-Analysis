@@ -37,7 +37,7 @@ int country(void) {
 		/* Var (1) */	cCode = 1;
 	else if (cName == "Brazil")
 			/* Var (2) */	cCode = 2;
-		else if (cName == "US")
+		else if (cName == "US" || cName == "United States")
 				/* Var (3) */	cCode = 3;
 			else if (cName == "China")
 					/* Var (4) */	cCode = 4;

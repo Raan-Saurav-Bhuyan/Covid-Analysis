@@ -4,6 +4,10 @@
 								 * same header file.												 *
 								 */
 
+#include "covid.h"				/* Header is included to make the 'covid' class and other			 *
+								 * functions accessible for the function calls.						 *
+								 */
+
 using namespace std;
 
 bool us(void) {
@@ -11,8 +15,8 @@ bool us(void) {
 	/**----------------------------------------------------------------------------------------------**
 	 **                                Variable Declaration Section								     **
 	 **/
-			 //TODO: remove comment from "LSSD covid;"
-			 /*LSSD covid;*/	/* Variable of type class 'LSSD'.									 *
+
+			LSSD covid;			/* Variable of type class 'LSSD'.									 *
 								 * Class definition available in the source file 'covid.h'.          *
 								 */
 
@@ -31,6 +35,13 @@ bool us(void) {
 			float dK, dA, dr;	/* Variable to hold the input for the parameter increment vector.	 *
 								 * Definition available on the README.md file.						 *
 								 */
+
+			int month;			/* Variable to hold the number of month to analyse data.			 *
+								 */
+
+			string mName;		/* String to attach the abbriviation of the name					 *
+								 * of the month.													 *
+								 */
 	//================================================================================================//
 
 	cout << endl << "\n\t\t\tINPUT SCREEN | UNITED STATES";
@@ -40,18 +51,56 @@ bool us(void) {
 	/**----------------------------------------------------------------------------------------------**
 	 ** The absolute or relative path to the file can be manually entered							 **
 	 ** which is holding the data in a Comma Seperated Values (.csv) file.							 **
-	 ** Please put the file inside the '/app/build/exe/main/debug/data/' folder						 **
+	 ** Please put the file inside the '/data/US/' folder.											 **
 	 **/
 
-	 //TODO: remove comment from covid.readinputfile()
-	 //covid.readinputfile /* Enter file inside braces (): */(/data/India/<file name>);
-	 //================================================================================================//
+	labelMonth:
+		cout << endl << "\n\tWhich month's data to be analysed?" << endl;
+	cout << "\tPlease insert the month's number: ";
+	cin >> month;
 
-	 //================================================================================================//
-	 /**----------------------------------------------------------------------------------------------**
-	  ** Manually choose the limit of daily prediction:												  **
-	  ** N.B. Prediction might not be sufficient to expect the peak or inflection point.			  **
-	  **/
+	if (month == 1)
+		mName = "(Jan)";
+	else if (month == 2)
+		mName = "(Feb)";
+	else if (month == 3)
+		mName = "(Mar)";
+	else if (month == 4)
+		mName = "(Apr)";
+	else if (month == 5)
+		mName = "(May)";
+	else if (month == 6)
+		mName = "(June)";
+	else if (month == 7)
+		mName = "(July)";
+	else if (month == 8)
+		mName = "(Aug)";
+	else if (month == 9)
+		mName = "(Sept)";
+	else if (month == 10)
+		mName = "(Oct)";
+	else if (month == 11)
+		mName = "(Nov)";
+	else if (month == 12)
+		mName = "(Dec)";
+	else {
+		cout << endl << "\n\tInvalid month number!";
+		goto labelMonth;
+	}
+
+	mName = "/data/US/US_data" + mName + ".csv";
+	cout << endl << "\n\tThe selected file is: " << mName << endl;
+	cout << endl << "--------------------------------------------------------------------------------";
+
+	//TODO: remove comment from covid.readinputfile
+	//covid.readinputfile /* Enter file inside braces (): */(mName);
+	//================================================================================================//
+
+	//================================================================================================//
+	/**----------------------------------------------------------------------------------------------**
+	 ** Manually choose the limit of daily prediction:												 **
+	 ** N.B. Prediction might not be sufficient to expect the peak or inflection point.				 **
+	 **/
 
 	cout << endl << "\n\tInsert the limit of the days of prediction table" << endl;
 	cout << "\t(Remember that a limit exceeding 60 days is almost meaningless): ";

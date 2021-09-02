@@ -11,7 +11,8 @@ void countrySelect(void);		/* Just a function to show available countries in cas
 								 */
 
 //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//
-/** Below are some bolean functions to start the process of evaulation of covid									 **
+/**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++** 
+ ** Below are some bolean functions to start the process of evaulation of covid									 **
  ** cases in the required country and returns whether the process												 **
  ** was successful or a failure.
  **/

@@ -1,9 +1,4 @@
 #include <iostream>
-#include "country.h"				/* Included to provide access to below functions:				 *
-									 * 1. int country(),											 *
-									 * 2. void countrySelect(void)									 *
-									 */
-
 #include <algorithm>				/* Included to provide access to transform() function.			 *
 									 */
 
@@ -12,20 +7,28 @@
 									 * 2. ignore()													 *
 									 */
 
+#include "country.h"				/* Included to provide access to below functions:				 *
+									 * 1. int country(),											 *
+									 * 2. void countrySelect(void)									 *
+									 */
+
+#include "covid.h"					/* Header is included to make the 'covid' class and other		 *
+									 * functions accessible for the function calls.				     *
+									 */
+
 using namespace std;
 
-bool manConfig() {
+bool manConfig(void) {
 	//================================================================================================//
 	/**----------------------------------------------------------------------------------------------**
 	 **                                Variable Declaration Section								     **
 	 **/
 
-			//TODO: remove comment from "LSSD covid;"
-			 /*LSSD covid;*/	 /* Variable of type class 'LSSD'.									  *
-								  * Class definition available in the source file 'covid.h'.          *
-								  */
+			 LSSD covid;		/* Variable of type class 'LSSD'.									 *
+								 * Class definition available in the source file 'covid.h'.          *
+								 */
 
-			string iName;		/* A string to hold the pathname to the								 *
+			string pName;		/* A string to hold the pathname to the								 *
 								 * Comma Separated Values (.csv) file.								 *
 								 */
 
@@ -60,7 +63,6 @@ bool manConfig() {
 	}
 
 	{
-
 		string duplicate = countryName;		/* Local variable to temporarily hold the				 *
 											 * string input of countryName.							 *
 											 */
@@ -168,13 +170,42 @@ bool manConfig() {
 	 ** Please put the file inside the '/app/build/exe/main/debug/data/' folder						 **
 	 **/
 
-	cout << endl << "\n\tInsert the relative path to the Comma Separated Values (*.csv) file" << endl;
-	cout << "\t(The pathname should be '/data/<country_name>/<country_name>_data.csv') ";
-	cout << "without spaces: ";
-	/* Input (7) */	cin >> iName;
+	cin.ignore();		/* To ignore the previous 'enter' input										 *
+						 * in order to prevent detection by below if-else.							 *
+						 */
 
-	//TODO: remove comment from covid.readinputfile()
-	//covid.readinputfile /* Enter file inside braces (): */(iName);
+	/* The below for-loop replaces any spaces in the country name with an underscore.				 *
+	 */
+
+	for (int i = 0; i < countryName.length(); i++) {
+		if (countryName[i] == ' ')
+			countryName[i] = '_';
+	}
+
+	string prefix = "/data/" + countryName + "/";
+	labelRename:
+		cout << endl << "\n\tInsert the name of the Comma Separated Values (*.csv) file:" << endl;
+	cout << "\t(The path to the file should be '/data/<country_name>/'): ";
+	/* Str (2) */	getline(cin, pName);
+
+	/* The below for-loop checks if there's any space in the filename.								 *
+	 * If yes, then it will ask to rename the file without keeping spaces.							 *
+	 */
+
+	for (int i = 0; i < pName.length(); i++) {
+		if (pName[i] == ' ') {
+			cout << endl << "\n\tCannot open filename with spaces!" << endl;
+			cout << "\tRename the filename without any spaces.";
+			goto labelRename;
+		}
+	}
+
+	pName = prefix + pName;
+	cout << endl << "\n\tThe selected file is: " << pName << endl;
+	cout << endl << "--------------------------------------------------------------------------------";
+
+	//TODO: remove comment from covid.readinputfile
+	//covid.readinputfile /* Enter file inside braces (): */ (pName);
 	//================================================================================================//
 
 	cout << endl << "--------------------------------------------------------------------------------";
@@ -187,10 +218,9 @@ bool manConfig() {
 
 	cout << endl << "\n\tInsert the limit of the days of prediction table" << endl;
 	cout << "\t(Remember that a limit exceeding 60 days is almost meaningless): ";
-	/* Input (8) */	cin >> dayLimit;
+	/* Input (7) */	cin >> dayLimit;
 
-	//TODO: remove comment from covid.EndTime
-	//covid.EndTime = 60;
+	covid.EndTime = dayLimit;
 	//================================================================================================//
 	cout << endl << "--------------------------------------------------------------------------------";
 

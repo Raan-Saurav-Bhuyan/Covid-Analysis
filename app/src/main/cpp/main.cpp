@@ -2,15 +2,20 @@
 
 #include <iostream>
 #include <stdlib.h>
+#include <string>					/* Included to provide access to below functions:				 *
+									 * 1. getline(),												 *
+									 * 2. ignore()													 *
+									 */
+
 #include "country.h"				/* Included to provide access to below functions:				 *
 									 * 1. int country(),											 *
 									 * 2. void countrySelect(void)									 *
 									 */
 
-#include <string>					/* Included to provide access to below functions:				 *
-									 * 1. getline(),												 *
-									 * 2. ignore()													 *
+#include "covid.h"					/* Header is included to make the 'covid' class and other		 *
+									 * functions accessible for the function calls.				     *
 									 */
+
 using namespace std;
 
 int main() {
@@ -87,7 +92,7 @@ int main() {
 				break;
 			}
 			case 3: {
-				cout << endl << "\n\tAssigned country: US" << endl;
+				cout << endl << "\n\tAssigned country: United States" << endl;
 				cout << "\tCountry Code = 3" << endl;
 
 				/* Err (4) */	if (us() == false) {
