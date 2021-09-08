@@ -16,7 +16,16 @@
 									 * functions accessible for the function calls.				     *
 									 */
 
+/*\^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\*/
+//For testing purposes.
+
+#include "../test-headers/test-main.h"
+
+string cppMain::testWhatif::pass;
+/*\^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\*/
 using namespace std;
+
+
 
 int main() {
 	cout << endl << "\n=========================================================================";
@@ -49,8 +58,15 @@ int main() {
 	cout << "\tPress 'y' if yes or 'n' if no: ";
 	/* Str (1) */	getline(cin, whatif);
 	
-	if (whatif.length() == 0)
-		whatif = "y";
+	//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^//
+	/* Testing whatif default value:-------------------------------------------------------------------
+	 * Using class 'testWhatif'; method: pass-whatifAtBegin(string), ret_Value().----------------------
+	 */
+
+	cppMain::testWhatif::pass_WhatifAtBegin(whatif);
+	whatif = cppMain::testWhatif::ret_Value();
+
+	//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^//
 
 	if (whatif == "n") {
 
@@ -137,12 +153,21 @@ int main() {
 	cout << "\tPress 'y' if yes or 'n' if no: ";
 	/* Str (2) */	getline(cin, whatif);
 
-	if (whatif.length() == 0 || whatif == "n") {
+	//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^//
+	/* test-whatif:--------------------------------------------------------------------------------------
+	 * Using class 'testWhatif'; object 'maintest'; method: pass-whatifAtLast(string).-------------------
+	 */
+
+	cppMain::testWhatif maintest;
+
+	if (maintest.pass_WhatifAtLast(whatif) == 1) {
 		cout << endl << "\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-";
 		cout << endl << endl << endl;
 
 		return 0;
 	}
+	//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^//
+
 	else if (whatif == "y")
 		/* Jump (9) */	goto labelStartOver;
 	else {

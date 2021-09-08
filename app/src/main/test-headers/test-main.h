@@ -14,7 +14,10 @@ namespace cppMain {
 
 		static void pass_WhatifAtBegin(string value) {
 
-			if (value.length() == 0)
+			if (value.length() == 0)	/* Default input test
+										 * of the first occurence
+										 * of 'whatif'.
+										 */
 				value = "y";
 
 			pass = value;
@@ -27,7 +30,10 @@ namespace cppMain {
 
 		int pass_WhatifAtLast(string value) {
 
-			if (value.length() == 0 || value == "n")
+			if (value.length() == 0 || value == "n")	/* Default input test
+														 * of the last occurence
+														 * of 'whatif'.
+														 */
 				return 1;
 		}
 

@@ -16,6 +16,12 @@
 									 * functions accessible for the function calls.				     *
 									 */
 
+/*\^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\*/
+//For testing purposes.
+
+#include "../test-headers/test-main.h"
+/*\^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\*/
+
 using namespace std;
 
 bool manConfig(void) {
@@ -57,26 +63,31 @@ bool manConfig(void) {
 		cout << endl << "\n\tEnter the country name: ";
 	/* Str (1) */	getline(cin, countryName);
 
-	if (countryName.length() == 0) {
+	//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^//
+	/* Testing whatif default value:-------------------------------------------------------------------
+	 * Using class 'testcountryName'; method: test_Country(string).------------------------------------
+	 */
+
+	if (cppManual::testcountryName::test_Country(countryName) == 0) {
+
 		cout << endl << "\n\tYou have not entered the country name!" << endl;
+
 		/* Jump (1) */	goto labelCountryName;
 	}
+	//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^//
 
 	{
-		string duplicate = countryName;		/* Local variable to temporarily hold the				 *
-											 * string input of countryName.							 *
-											 */
-		//============================================================================================//
-		/**
-		 ** transform() function defined under the 'algorithm.h' header file						 *
-		 ** is used to change the 'duplicate' string into uppercase.								 *
-		 **/
-		transform(duplicate.begin(), duplicate.end(), duplicate.begin(), ::toupper);
+		//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^//
+		/* Testing whatif default value:--------------------------------------------------------------
+		 * Using class 'testcountryName'; method: check_CountryName(string).--------------------------
+		 */
+
+		string duplicate = cppManual::testcountryName::check_CountryName(countryName);
+		//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^//
 
 		cout << endl << "\n\t\t\tINPUT SCREEN | " << duplicate;
 		cout << endl << "---------------------------------------------------------------------";
 		cout << "-----------";
-		//============================================================================================//
 	}
 
 	//================================================================================================//

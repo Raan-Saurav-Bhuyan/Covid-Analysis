@@ -58,7 +58,7 @@ void LSSD::readinputfile(string filenamex) {
                 }
         }
             
-        /* After completion, the file should be closed as precaution to avoid                        *
+           /* After completion, the file should be closed as precaution to avoid                     *
             * overwriting it.                                                                        *
             */
             myfile.close();
