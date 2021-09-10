@@ -23,7 +23,7 @@ using namespace std;
  **										 Brazilian Space Agency, Brazil											 **
  **/
 
-const int max_iter = 10000;		/* maximum number of iterations													 *
+const int max_iter = 100000;	/* maximum number of iterations													 *
 								 */
 class tools {
 	private:
@@ -77,7 +77,7 @@ class LSSD{
 
 		
 		vector<float> NcLog, dNcLog;			/* NcLog, dNcLog - contain the forecast of the model			 *
-												 * for the total and thedaily number of cases					 *
+												 * for the total and the daily number of cases.					 *
 												 */
   
 		//tools variable
@@ -87,17 +87,19 @@ class LSSD{
 
 			float VarNcases();
 
-			void Logistic();				/* Logistic() updates NcLog with the model forecast.				 *
-											 */
-
-			void dLogistic();				/* dLogistic() updates dNcLog with the model forecast.				 *
-											 */
-
 			float dRdK();
 
 			float dRdA();
 
 			float dRdr();
+
+		/* Src (/functions/logs.cpp) */
+
+			void Logistic();				/* Logistic() updates NcLog with the model forecast.				 *
+											 */
+
+			void dLogistic();				/* dLogistic() updates dNcLog with the model forecast.				 *
+											 */
 
 		/* Src (/functions/guess.cpp)*/
 
@@ -109,10 +111,14 @@ class LSSD{
   
 		/* Src (read-write.cpp) */
 
-			void readinputfile(string filenamex);
+			bool readinputfile(string filenamex);
 
-			void writeoutput(string filenamex);
+			void writeOutput(string filenamex);
 
-			void writeprediction(string filenamex);
+			void writeOutCsv(string filenamex);
+
+			void writePrediction(string filenamex);
+
+			void writePredCsv(string filenamex);
 };
 //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//

@@ -30,7 +30,7 @@ int country(void) {
 	//================================================================================================//
 
 	cout << endl << "\n\tInsert the name of the country for evaluation" << endl;
-	cout << "\t(Remember to enter the full name without spaces.): ";
+	cout << "\t(Remember to enter the full name including appropriate spaces.): ";
 	getline(cin, cName);	//Optimized: Replaced 'std::cin' with 'std::getline()' to include spaces.
 
 	if (cName == "India")
@@ -56,7 +56,7 @@ void countrySelect(void) {
 	cout << endl << "\n\tAvailable countries are:" << endl;
 	cout << "\t\t1. India," << endl;
 	cout << "\t\t2. Brazil," << endl;
-	cout << "\t\t3. US, and" << endl;
+	cout << "\t\t3. US (United States), and" << endl;
 	cout << "\t\t4. China" << endl;
 	cout << endl << "--------------------------------------------------------------------------------";
 }

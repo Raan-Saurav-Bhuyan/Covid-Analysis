@@ -11,10 +11,8 @@ using namespace std;
  **/
 void LSSD::Logistic() {
 
-	for (int i = 0; i <= EndTime; i++) {
-
+	for (int i = 0; i <= EndTime; i++)
 		NcLog.push_back(FF.Ncases(i, Kg, Ag, rg));
-	}
 }
 //================================================================================================//
 
@@ -26,9 +24,7 @@ void LSSD::Logistic() {
 
 void LSSD::dLogistic() {
 
-	for (int i = 1; i <= EndTime; i++) {
-
+	for (int i = 1; i <= EndTime; i++)
 		dNcLog.push_back(FF.dNcases(i, Kg, Ag, rg));
-	}
 }
 //================================================================================================//

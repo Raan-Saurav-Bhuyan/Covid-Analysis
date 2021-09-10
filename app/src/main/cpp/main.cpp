@@ -19,15 +19,15 @@
 using namespace std;
 
 int main() {
-	cout << endl << "\n=========================================================================";
-	cout << "=======================================================================" << endl;
+	cout << endl << "\n===================================================================";
+	cout << "=====================================================" << endl;
 
-	cout << "\t\t\t\t||\t\t    Covid-Analysis C++ Application\t\t\t||" << endl;
-	cout << "\t\t\t\t||\tEstimating the COVID-19 Evolution Using the Logistic Model\t||" << endl;
-	cout << "\t\t\t\t||\t\t   Raan Saurav Bhuyan, August, 2021\t\t\t||" << endl;
+	cout << "\t\t||\t\t    Covid-Analysis C++ Application\t\t\t||" << endl;
+	cout << "\t\t||\tEstimating the COVID-19 Evolution Using the Logistic Model\t||" << endl;
+	cout << "\t\t||\t\t   Raan Saurav Bhuyan, August, 2021\t\t\t||" << endl;
 
-	cout << "=========================================================================";
-	cout << "=======================================================================\n" << endl;
+	cout << "===================================================================";
+	cout << "=====================================================\n" << endl;
 
 	//================================================================================================//
 	/**----------------------------------------------------------------------------------------------**
@@ -40,6 +40,10 @@ int main() {
 
 			int countryCode = 0;/* Variable to hold the unique country code							 *
 								 * for each of the countries available to sharable data.			 *
+								 */
+
+			int retManConfig;	/* Variable to hold the return value from							 *
+								 * the manConfig() function.										 *
 								 */
 	//================================================================================================//
 
@@ -56,17 +60,20 @@ int main() {
 
 		whatif = "y";	/* Failsafe statement.														 *
 						 */
-		
-		/* Err (1) */	if (manConfig() == false) {
-			cout << endl << "\n\tSomething went wrong!";
-		}
+
+		retManConfig = manConfig();
+
+		/* Err (1) */	if (retManConfig == 1)
+			/* Jump (1) */	goto labelExit1;
+							else if (retManConfig == 0)
+				/* Jump (2) */	goto labelExit0;
 	}
 	else if (whatif == "y") {
 		//============================================================================================//
 		/**------------------------------------------------------------------------------------------**
-		 ** The switch statement below checks the return integer by country() function				 *
-		 ** and redirects to the requested country's source file to handle the pre-configured		 *
-		 ** process of evaluation.																	 *
+		 ** The switch statement below checks the return integer by country() function				 **
+		 ** and redirects to the requested country's source file to handle the pre-configured		 **
+		 ** process of evaluation.																	 **
 		 **/
 
 		labelCountry:
@@ -77,40 +84,36 @@ int main() {
 				cout << endl << "\n\tAssinged country: India," << endl;
 				cout << "\tCountry Code = 1" << endl;
 
-				/* Err (2) */	if (india() == false) {
-					cout << endl << "\n\tSomething went wrong!";
-				}
+				/* Err (2) */	if (india() == false)
+					/* Jump (3) */	goto labelExit0;
 				break;
 			}
 			case 2: {
 				cout << endl << "\n\tAssigned country: Brazil" << endl;
 				cout << "\tCountry Code = 2" << endl;
 
-				/* Err (3) */	if (brazil() == false) {
-					cout << endl << "\n\tSomething went wrong!";
-				}
+				/* Err (3) */	if (brazil() == false)
+					/* Jump (4) */	goto labelExit0;
 				break;
 			}
 			case 3: {
 				cout << endl << "\n\tAssigned country: United States" << endl;
 				cout << "\tCountry Code = 3" << endl;
 
-				/* Err (4) */	if (us() == false) {
-					cout << endl << "\n\tSomething went wrong!";
-				}
+				/* Err (4) */	if (us() == false)
+					/* Jump (5) */	goto labelExit0;
 				break;
 			}
 			case 4: {
 				cout << endl << "\n\tAssigned country: China" << endl;
 				cout << "\tCountry Code = 4" << endl;
 
-				/* Err (5) */	if (china() == false) {
-					cout << endl << "\n\tSomething went wrong!";
-				}
+				/* Err (5) */	if (china() == false)
+					/* Jump (6) */	goto labelExit0;
 				break;
 			}
 			default: {
-				//if (countryCode == NULL) {
+
 				cout << endl << "\n\tCountry couldn't be evaluated!" << endl;
 
 				countrySelect();
@@ -119,25 +122,29 @@ int main() {
 		//================================================================================================//
 		}
 	} else {
+
 		cout << endl << "\n\tWrong input!";
 		/* Jump (8) */	goto labelStartOver;
 	}
-	//====================================================================================================//
-	/**--------------------------------------------------------------------------------------------------*
-	 ** I call the below if-else as 'exit-check'														 *
-	 ** of which the core functionality is to ask whether to exit										 *
-	 ** or repeat the process.																			 *
-	 **/
 
-	cin.ignore();		/* To ignore the previous 'enter' input											 *
+	//====================================================================================================//
+	/**--------------------------------------------------------------------------------------------------**
+	 ** I call the below if-else as 'exit-check'														 **
+	 ** of which the core functionality is to ask whether to exit										 **
+	 ** or repeat the process.																			 **
+	 **/
+	labelExit0:
+		cin.ignore();	/* To ignore the previous 'enter' input											 *
 						 * in order to prevent detection by below if-else.								 *
 						 */
-	labelExit:
+
+	labelExit1:
 		cout << endl << "\n\tDo you want to repeat the process again? (Default is no [n].)" << endl;
 	cout << "\tPress 'y' if yes or 'n' if no: ";
 	/* Str (2) */	getline(cin, whatif);
 
 	if (whatif.length() == 0 || whatif == "n") {
+
 		cout << endl << "\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-";
 		cout << endl << endl << endl;
 
@@ -147,7 +154,7 @@ int main() {
 		/* Jump (9) */	goto labelStartOver;
 	else {
 		cout << endl << "\n\tWrong input!";
-		/* Jump (10) */	goto labelExit;
+		/* Jump (10) */	goto labelExit1;
 	}
 	//=====================================================================================================//
 }

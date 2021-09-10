@@ -11,7 +11,7 @@ using namespace std;
  ** and save into DATA[] and dDATA[]                                                                     **
  **/
 
-void LSSD::readinputfile(string filenamex) {
+bool LSSD::readinputfile(string filenamex) {
     //================================================================================================//
     /**----------------------------------------------------------------------------------------------**
      **                              Variable Declaration Section                                    **
@@ -43,30 +43,38 @@ void LSSD::readinputfile(string filenamex) {
         
     //================================================================================================//
     /**----------------------------------------------------------------------------------------------**
-        ** Checks if there is any comment line, and skips it.                                        *
-        ** After completion, valid lines are saved in lines.                                         *
-        **/
-    if (myfile.is_open()) {
-        cout << endl << "->>>> Open input file::" << filenamex << endl;
+     ** Checks if there is any comment line, and skips it.                                           **
+     ** After completion, valid lines are saved in lines.                                            **
+     **/
 
-        while (getline(myfile, line)) {
-                
-                if (line.substr(0, 1) != "#") {    /* Skip lines starting with '#' and               *
-                                                    * Push back valid line in lines                  *
-                                                    */
-                    lines.push_back(line);
-                }
-        }
+    if (myfile.is_open()) {
+
+        cout << endl << "\tThe selected file is \"" << filenamex << "\"." << endl;
+
+        while (getline(myfile, line))
+            if (line.substr(0, 1) != "#")      
+                lines.push_back(line);         /* Skip lines starting with '#' and                   *
+                                                * Push back valid line in lines                      *
+                                                */
             
-        /* After completion, the file should be closed as precaution to avoid                        *
-            * overwriting it.                                                                        *
-            */
-            myfile.close();
+       /* After completion, the file should be closed as precaution to avoid                         *
+        * overwriting it.                                                                            *
+        */
+
+        myfile.close();
+    } else {
+
+        cout << endl << "\n\tThe file has not been found! Exiting ... ..." << endl;
+        cout << endl << "--------------------------------------------------------------------------";
+        cout << "------";
+
+        return false;
     }
+
     //================================================================================================//
 
     for (int i = 0; i < lines.size(); i++) {
-        field = lines[i].substr(lines[i].find(";") + 1, lines[i].length());
+        field = lines[i].substr(lines[i].find(",") + 1, lines[i].length());
             
         DATA.push_back((float)stof(field));        /* Push back data to the 'DATA' vector            *
                                                     * from valid lines.                              *
@@ -78,9 +86,8 @@ void LSSD::readinputfile(string filenamex) {
                                                     * original data, in a manner of                  *
                                                     * value 0 = value 1                              *
                                                     */
-    for (int i = 1; i < lines.size(); i++) {
+    for (int i = 1; i < lines.size(); i++)
         dDATA.push_back(DATA[i] - DATA[i - 1]);
-    }
 }
 //========================================================================================================//
 
@@ -89,21 +96,36 @@ void LSSD::readinputfile(string filenamex) {
  ** writing model and input data (including daily change) for the data time span                         ** 
  **/
 
-void LSSD::writeoutput(string filenamex) {
+void LSSD::writeOutput(string filenamex) {
+
     ofstream myfile(filenamex);    //opens file
+
+    myfile << "# Day | Total cases | Daily cases "<< endl;       /* There will be three columns         *
+                                                                  * in the output file.                 *
+                                                                  */
+
+    myfile << "--- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---" << endl;
         
-    cout << "Saving output::" << filenamex << endl;
-    myfile << "day, Ncsimul, Ncases, dNcsimul, dNcases "<< endl;       /* There will be five columns    *
-                                                                        * in the output file for        *
-                                                                        * daily cases.                  *
-                                                                        */
-        
-    for (int i = 0; i < DATA.size(); i++) {
-            
-           /* Inserts data into the file with name logistic_output_<country name>.csv.                  *
-            */
-        myfile << i+1 << "," << NcLog[i] << "," << DATA[i] << "," << dNcLog[i] << "," << dDATA[i] << endl;
+    for (int i = 0; i < DATA.size(); i++) { /* Inserts data into the file with name                     *
+                                             * logistic_output_<country name>.csv.                      *
+                                             */
+        myfile << "   " << i + 1 << "  |     " << DATA[i] << "      |   " << dDATA[i] << endl;
+        myfile << "--- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---" << endl;
     }
+
+    myfile.close();    //closes file
+}
+
+void LSSD::writeOutCsv(string filenamex) {
+
+    ofstream myfile(filenamex);    //opens file
+
+    for (int i = 0; i < DATA.size(); i++) { /* Inserts data into the file with name                     *
+                                             * logistic_output_<country name>.csv.                      *
+                                             */
+        myfile << "" << i + 1 << ", " << DATA[i] << ", " << dDATA[i] << endl;
+    }
+
     myfile.close();    //closes file
 }
 //========================================================================================================//
@@ -113,20 +135,41 @@ void LSSD::writeoutput(string filenamex) {
  ** writing model and input data (including daily change) up to EndTime                                  **
  **/
 
-void LSSD::writeprediction(string filenamex) {
+void LSSD::writePrediction(string filenamex) {
+
     ofstream myfile(filenamex); //opens file
-        
-    cout << "Saving prediction file::" << filenamex << endl;
-    myfile << "day, Ncsimul, dNcsimul" << endl;        /* There will be three columns in the output     *
-                                                        * file for daily predictions.                   *
-                                                        */
-        
-    for (int i = 0; i < EndTime; i++) {
-            
-           /* Inserts data into the file with name lolgistic_pred_<country name>.csv                    *
-            */
-        myfile << i+1 << "," << NcLog[i] << "," << dNcLog[i] << endl;
+
+    /* There will be three columns in the output                                                         *
+     * file for daily predictions.                                                                       *
+     */
+
+    myfile << "# Day | Total Cases Simulation | Daily Cases Simulation" << endl;
+    myfile << "--- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---" << endl;
+
+    for (int i = 0; i < EndTime; i++) {                 /* Inserts data into the file with name          *
+                                                         * lolgistic_pred_<country name>.csv             *
+                                                         */
+        myfile << "   " << i + 1 << "  |        " << NcLog[i] << "         |        " << dNcLog[i] << endl;
+        myfile << "--- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---" << endl;
     }
+
+    myfile.close();    //closes file
+}
+
+void LSSD::writePredCsv(string filenamex) {
+
+    ofstream myfile(filenamex); //opens file
+
+    /* There will be three columns in the output                                                         *
+     * file for daily predictions.                                                                       *
+     */
+
+    for (int i = 0; i < EndTime; i++) {                 /* Inserts data into the file with name          *
+                                                         * lolgistic_pred_<country name>.csv             *
+                                                         */
+        myfile << "" << i + 1 << ", " << NcLog[i] << ", " << dNcLog[i] << endl;
+    }
+
     myfile.close();    //closes file
 }
 //========================================================================================================//

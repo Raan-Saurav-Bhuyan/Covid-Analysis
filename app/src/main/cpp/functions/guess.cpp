@@ -24,9 +24,9 @@ bool LSSD::FindInitialGuess(int mx, int kx) {
 
     C3 = DATA[kg];
 
-    cout << endl << "\n\tAn initial guess for the Logistic model was found..." << endl;
+    cout << endl << "\n\tAn initial guess for the Logistic model was found." << endl;
 
-    /* Initial guess                                                                             *
+    /* Initial guess.                                                                            *
      */
 
     Kg = FF.K(C1, C2, C3);
@@ -40,14 +40,36 @@ bool LSSD::FindInitialGuess(int mx, int kx) {
 
     if ((Ag < 0) || (Kg < DATA[DATA.size() - 1])) {
 
-        cout << endl << "\n\tIt wasnt possible to find a solution..." << endl;
+        cout << "\tHowever it wasn\'t possible to find a solution!" << endl;
+
+        if (Ag < 0) {
+
+            cout << endl << "\tAg = " << Ag << endl;
+
+            cout << "\tREASON: It is found that Ag < 0." << endl;
+        } else if (Kg < DATA[DATA.size() - 1]) {
+
+            cout << endl << "\tKg = " << Kg << " | ";
+            cout << "Last data entry = " << DATA[DATA.size() - 1] << endl;
+
+            cout << "\tREASON: It is found that ";
+            cout << "Kg < Last data entry." << endl;
+            }
+
+        cout << endl << "--------------------------------------------------------------------------";
+        cout << "------";
 
         retval = false;
-    }
-    else {
-        cout << endl << "\n\tK(0)=" << Kg << endl;
-        cout << endl << "\n\tA(0)=" << Ag << endl;
-        cout << endl << "\n\tr(0)=" << rg << endl;
+    } else {
+
+        cout << endl << "\n\tK(0)= " << Kg;
+        cout << endl << "\t!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
+
+        cout << endl << "\n\tA(0)= " << Ag;
+        cout << endl << "\t!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
+
+        cout << endl << "\n\tr(0)= " << rg;
+        cout << endl << "\t!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
 
         /* Find the time of maximum daily cases                                                  *
          */
@@ -56,11 +78,19 @@ bool LSSD::FindInitialGuess(int mx, int kx) {
 
         Cp = Kg / 2;
 
-        cout << endl << "\n\tEstimated time constant::" << 1 / rg << " days" << endl;
-        cout << endl << "\n\tEstimated time of maximum::" << tp << " days after the initial day" << endl;
-        cout << endl << "\n\tEstimated maximum cases at end time::" << Kg << endl;
+        cout << endl << "\n\tEstimated time constant:: " << 1 / rg << " days";
+        cout << endl << "\t!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
+
+        cout << endl << "\n\tEstimated time of maximum daily cases:: " << tp << "days" << endl;
+        cout << "\tafter the initial day.";
+        cout << endl << "\t!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
+
+        cout << endl << "\n\tEstimated maximum cases at end time:: " << Kg;
+        cout << endl << "\t!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
+
         retval = true;
     }
+
     return retval;
 }
 //================================================================================================//
