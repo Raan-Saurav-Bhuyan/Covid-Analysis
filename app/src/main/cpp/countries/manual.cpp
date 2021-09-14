@@ -18,7 +18,7 @@
 
 using namespace std;
 
-int manConfig(void) {
+bool manConfig(void) {
 	//================================================================================================//
 	/**----------------------------------------------------------------------------------------------**
 	 **                                Variable Declaration Section								     **
@@ -68,9 +68,9 @@ int manConfig(void) {
 											 * string input of countryName.							 *
 											 */
 		//============================================================================================//
-		/**
-		 ** transform() function defined under the 'algorithm.h' header file						 *
-		 ** is used to change the 'duplicate' string into uppercase.								 *
+		/**------------------------------------------------------------------------------------------**
+		 ** transform() function defined under the 'algorithm.h' header file						 **
+		 ** is used to change the 'duplicate' string into uppercase.								 **
 		 **/
 
 		transform(duplicate.begin(), duplicate.end(), duplicate.begin(), ::toupper);
@@ -217,7 +217,7 @@ int manConfig(void) {
 	pName = prefix + pName;
 
 	if (covid.readinputfile(pName) == false)
-		return 1;
+		return false;
 	else {
 
 		cout << endl << "--------------------------------------------------------------------------";
@@ -348,9 +348,40 @@ int manConfig(void) {
 		cout << endl << "-------------------------------------------------------------------------";
 		cout << "-------";
 		//============================================================================================//
-	} else
-		return 0;
+
+		//============================================================================================//
+		/**------------------------------------------------------------------------------------------**
+		 ** Below is the code-block to customize the option to open the folder						 **
+		 ** where the generated *.csv files reside.													 **
+		 **/
+		{
+			string file;
+			int choose = 0;
+
+			cin.ignore();
+
+			labelFile:
+				cout << endl << "\n\tDo you want to open the folder to *.csv files? ";
+			cout << "(Default is no [n].)" << endl;
+			cout << "\tEnter 'y' if yes or 'n' if no: ";
+			getline(cin, file);
+
+			if (file.length() == 0 || file == "n") {
+
+				return true;
+			}
+			else if (file == "y") {
+				
+				system("explorer excel\\Manual\\");
+			} else {
+
+				cout << endl << "\n\tWrong input!";
+				goto labelFile;
+			}
+		}
+		//============================================================================================//
+	}
 	//================================================================================================//
 
-	return 0;
+	return true;
 }

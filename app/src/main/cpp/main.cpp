@@ -18,7 +18,52 @@
 
 using namespace std;
 
-int main() {
+int main(int argc, char* argv[]) {
+	//================================================================================================//
+	/**----------------------------------------------------------------------------------------------**
+	 ** Error checking block for command line arguments. Designated errors are:						 **
+	 ** (1) if (argc > 3) [overloaded arguments]													 **
+	 ** (2) if (argc == 2) [conditional]															 **
+	 ** (3) if argv[1] doesn't satisfy any condition.												 **
+	 **/
+	if (argc > 3) {		/* More than two command line arguments are unsupported.					 *
+						 */
+
+		string ext3 = argv[3];
+
+		cout << endl << "\nInvalid argument \"" << ext3 << "\"!\nTry again.\n" << endl;
+
+		exit(0);
+	}
+	
+	if (argc > 1) {
+
+		string ext = argv[1];
+
+		if (ext == "-c" || ext == "--country") {
+
+			if (argc == 2) {	/* Country name must be passed as support parameter					 *
+								 * such as "-c --<country name>".									 *
+								 */
+
+				cout << endl << "\nCountry name isn't passed as support argument for \"" << ext << "\"!";
+				cout << endl << "Try again.\n" << endl;
+
+				exit(0);
+			} 
+		} else if (ext == "-h" || ext == "--help");
+				else {			/* If the fist command line argument mismatches,					 *
+								 * it will cause exit.												 *
+								 */
+
+					cout << endl << "\nInvaild argument \"" << ext << "\"!\nTry again.\n" << endl;
+
+					exit(0);
+				}
+
+	}
+	//================================================================================================//
+
 	cout << endl << "\n===================================================================";
 	cout << "=====================================================" << endl;
 
@@ -42,10 +87,68 @@ int main() {
 								 * for each of the countries available to sharable data.			 *
 								 */
 
-			int retManConfig;	/* Variable to hold the return value from							 *
+			bool retManConfig;	/* Variable to hold the return value from							 *
 								 * the manConfig() function.										 *
 								 */
 	//================================================================================================//
+
+	//================================================================================================//
+	/**----------------------------------------------------------------------------------------------**
+	 ** External command line arguments can be passed to the program which							 **
+	 ** have been configured in the below section.													 **
+	 **/
+
+	if (argc == 1)
+		goto labelStartOver;
+		else {	//Operation block of the first command line argument
+
+			string ext1 = argv[1];
+
+			if (ext1 == "-c" || ext1 == "--country") {
+
+				string ext2 = argv[2];
+
+				if (ext2 == "-m" || ext2 == "--manual") {
+
+					manConfig();
+
+					return 0;
+				}		else if (ext2 == "--india") {
+
+							india();
+
+							return 0;
+						}		else if (ext2 == "--brazil") {
+
+									brazil();
+
+									return 0;
+								}		else if (ext2 == "--china") {
+
+											china();
+
+											return 0;
+										}		else if (ext2 == "--us") {
+
+													us();
+
+													return 0;
+												}		else {
+
+															cout << endl << "\n\tInvalid argument \"";
+															cout << ext2 << "\"!\n\tTry again." << endl;
+
+															exit(0);
+														}
+			} else if (ext1 == "-h" || ext1 == "--help") {
+
+				cout << endl << "\n\tHelp entered!";
+
+				exit(0);
+			}
+		}
+	//================================================================================================//
+
 
 	labelStartOver: 
 		cout << endl << "\n\tDo you want to select a country with pre-configured settings? ";
@@ -63,10 +166,8 @@ int main() {
 
 		retManConfig = manConfig();
 
-		/* Err (1) */	if (retManConfig == 1)
+		/* Err (1) */	if (retManConfig == false || retManConfig == true)
 			/* Jump (1) */	goto labelExit1;
-							else if (retManConfig == 0)
-				/* Jump (2) */	goto labelExit0;
 	}
 	else if (whatif == "y") {
 		//============================================================================================//

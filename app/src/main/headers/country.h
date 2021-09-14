@@ -17,7 +17,7 @@ void countrySelect(void);		/* Just a function to show available countries in cas
  ** was successful or a failure.
  **/
 
-int manConfig(void);
+bool manConfig(void);
 bool india(void);
 bool brazil(void);
 bool us(void);
