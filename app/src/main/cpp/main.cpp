@@ -16,6 +16,13 @@
 									 * functions accessible for the function calls.				     *
 									 */
 
+/*\^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\*/
+// For testing purposes.
+
+// #include "../test-headers/test-main.h"
+
+// string cppMain::testWhatif::pass;
+/*\^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\*/
 using namespace std;
 
 int main(int argc, char* argv[]) {
@@ -60,7 +67,6 @@ int main(int argc, char* argv[]) {
 
 					exit(0);
 				}
-
 	}
 	//================================================================================================//
 
@@ -135,7 +141,8 @@ int main(int argc, char* argv[]) {
 													return 0;
 												}		else {
 
-															cout << endl << "\n\tInvalid argument \"";
+														cout << endl
+															<< "\n\tInvalid argument \"";
 															cout << ext2 << "\"!\n\tTry again." << endl;
 
 															exit(0);

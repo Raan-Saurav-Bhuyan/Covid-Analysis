@@ -16,6 +16,12 @@
 									 * functions accessible for the function calls.				     *
 									 */
 
+/*\^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\*/
+// For testing purposes.
+
+// #include "../test-headers/test-main.h"
+/*\^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\*/
+
 using namespace std;
 
 bool manConfig(void) {
@@ -62,6 +68,7 @@ bool manConfig(void) {
 		cout << endl << "\n\tYou have not entered the country name!" << endl;
 		/* Jump (1) */	goto labelCountryName;
 	}
+	//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^//
 
 	{
 		string duplicate = countryName;		/* Local variable to temporarily hold the				 *
@@ -117,7 +124,7 @@ bool manConfig(void) {
 	labelAlpha:
 		cout << endl << "\n\tInsert the value of acceleration parameter alpha" << endl;
 	cout << "\t(Remember always, alpha < 1): ";
-	/* Input (3) */	 cin >> alpha;
+	/* Input (3) */	cin >> alpha;
 
 	/* Check (1) */	if (alpha >= 1) {
 
@@ -139,7 +146,7 @@ bool manConfig(void) {
 
 	labeldK:
 		cout << endl << "\n\tInsert the value of parameter increment vector dK: ";
-	/* Input (4) */	 cin >> dK;
+	/* Input (4) */ cin >> dK;
 
 	/* check (2) */	if (dK >= 1) {
 
@@ -149,7 +156,7 @@ bool manConfig(void) {
 
 	labeldA:
 		cout << endl << "\n\tInsert the value of parameter increment vector dA: ";
-	/* Input (5) */	 cin >> dA;
+	/* Input (5) */ cin >> dA;
 
 	/* Check (3) */	if (dA >= 1) {
 
@@ -159,7 +166,7 @@ bool manConfig(void) {
 
 	labeldr:
 		cout << endl << "\n\tInsert the value of parameter increment vector dr: ";
-	/* Input (6) */	 cin >> dr;
+	/* Input (6) */ cin >> dr;
 
 	/* Check (4) */	if (dr >= 1e-3) {
 
@@ -168,7 +175,8 @@ bool manConfig(void) {
 	}
 	//================================================================================================//
 
-	cout << endl << "--------------------------------------------------------------------------------";
+	cout << endl
+		 << "--------------------------------------------------------------------------------";
 
 	//================================================================================================//
 	/**----------------------------------------------------------------------------------------------**
@@ -263,22 +271,22 @@ bool manConfig(void) {
 		 * and daily variation.								 										 *
 		 */
 
-		/* fn (1) */    covid.Logistic();
+		/* fn (1) */	covid.Logistic();
 		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
 		
-		/* fn (2) */    covid.dLogistic();
+		/* fn (2) */	covid.dLogistic();
 		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
 
-		/* Var (1) */   covid.varN = covid.VarNcases();
+		/* Var (1) */	covid.varN = covid.VarNcases();
 		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
 
-		/* Out (1) */   cout << endl << "\n\tEstimated VAR:: " << covid.varN;
+		/* Out (1) */	cout << endl << "\n\tEstimated VAR:: " << covid.varN;
 
 		cout << endl << "\t!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
 		cout << endl << "-------------------------------------------------------------------------";
 		cout << "-------";
 
-		/* Out (2) */   cout << endl << "\n\tEstimated dispersion s(0):: " << sqrt(covid.varN);
+		/* Out (2) */	cout << endl << "\n\tEstimated dispersion s(0):: " << sqrt(covid.varN);
 
 		cout << endl << "\t!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
 		cout << endl << "-------------------------------------------------------------------------";
@@ -293,22 +301,22 @@ bool manConfig(void) {
 		 * daily variation																			 *
 		 */
 
-		/* fn (1) */    covid.Logistic();
+		/* fn (1) */	covid.Logistic();
 		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
 
-		/* fn (2) */    covid.dLogistic();
+		/* fn (2) */	covid.dLogistic();
 		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
 
-		/* Var (1) */   covid.varN = covid.VarNcases();
+		/* Var (1) */	covid.varN = covid.VarNcases();
 		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
 
-		/* Out (1) */   cout << endl << "\n\tFinal VAR:: " << covid.varN;
+		/* Out (1) */	cout << endl << "\n\tFinal VAR:: " << covid.varN;
 
 		cout << endl << "\t!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
 		cout << endl << "-------------------------------------------------------------------------";
 		cout << "-------";
 
-		/* Out (2) */   cout << endl << "\n\tFinal dispersion:: " << sqrt(covid.varN);
+		/* Out (2) */	cout << endl << "\n\tFinal dispersion:: " << sqrt(covid.varN);
 
 		cout << endl << "\t!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
 		cout << endl << "-------------------------------------------------------------------------";
@@ -324,7 +332,7 @@ bool manConfig(void) {
 		 
 		cout << endl << "\n\t\"*.txt\" formatted output file is saved as: " << endl;
 		cout << "\t\"" << postfix1 << "\"" << endl;
-		/* File (1) */  covid.writeOutput(postfix1);		//*.txt
+		/* File (1) */	covid.writeOutput(postfix1);		//*.txt
 
 		cout << endl << "\t\"*.csv\" formatted ouput file is saved as: " << endl;
 		cout << "\t\"" << csvSave1 << "\"";
@@ -339,13 +347,14 @@ bool manConfig(void) {
 
 		cout << endl << "\n\t\"*.txt\" formatted prediction file is saved as: " << endl;
 		cout << "\t\"" << postfix2 << "\"" << endl;
-		/* File (3) */  covid.writePrediction(postfix2);	//*.txt
+		/* File (3) */	covid.writePrediction(postfix2);	//*.txt
 
 		cout << endl << "\t\"*.csv\" formatted prediction file is saved as: " << endl;
 		cout << "\t\"" << csvSave2 << "\"";
 		/* File (4) */	covid.writePredCsv(csvSave2);		//*.csv
 
-		cout << endl << "-------------------------------------------------------------------------";
+		cout << endl
+			 << "-------------------------------------------------------------------------";
 		cout << "-------";
 		//============================================================================================//
 
